@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add 
+            id="Chandan_StockNotification::home" 
+            title="Stock Notification" 
+            module="Chandan_StockNotification" 
+            sortOrder="10" 
+            resource="Chandan_StockNotification::home" 
+            />
+        <add  id="Chandan_StockNotification::list" 
+			 action="stocknotification/index/index"
+			 module="Chandan_StockNotification"
+			 parent="Chandan_StockNotification::home"
+			 resource="Chandan_StockNotification::list"
+			 sortOrder="30"
+			 translate="title"
+			 title="Out of stock products"/>
+        
+    </menu>
+</config>

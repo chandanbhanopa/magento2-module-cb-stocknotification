@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="stock_notification_listing_data_source" xsi:type="string">StockNotification</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="StockNotification" type="Chandan\StockNotification\Ui\DataProvider\StockNotification\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">stock_notification</argument>
+            <argument name="resourceModel" xsi:type="string">Chandan\StockNotification\Model\ResourceModel\StockNotification</argument>
+        </arguments>
+    </virtualType>
+</config>

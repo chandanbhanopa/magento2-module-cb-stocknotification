@@ -1,0 +1,67 @@
+<?php 
+$viewModel = $block->getData('viewModel'); 
+$products = $viewModel->getQuoteProducts();
+$quoteItems = $products->getAllVisibleItems();
+$customerId = $products->getCustomer()->getId();
+$outOfStockProductArray = array();
+
+foreach($quoteItems as $items) {
+	$productData = $items->getProduct();
+	$productId = $items->getProduct()->getId();
+	$productImage = $items->getProduct()->getSmallImage();
+	$isInStock = $viewModel->getStockStatus($productId);
+	$productName = $items->getName();
+	$productSku = $items->getSku();
+	$productImage = $viewModel->getProductImages($productData->getId());
+	if(!$isInStock) {
+		$outOfStockProductArray[]= [
+			'customer_id' => $customerId,
+			'product_id'=> $productId,
+			'product_sku' => $productSku,
+			'product_name' => $productName,
+			'quote_item_id'=> $items->getItemId(),
+			'image' => $productImage
+		];	
+	}
+	
+}
+$count = count($outOfStockProductArray);
+?>
+<div id="stock-notification-popup" class="stock-notification-popup">
+    <div class="popup-modal">
+        <div class="popup-modal-text">
+            <h3 class="title">Out of stock</h3>
+            <p class="sub-title"><?=__("Click on notify me button, you get email when below products are available for sell.");?></p>
+            <div class="custom-control">
+	            <form action="" name="outofstock" class="stock-notification">
+	            	<input type="hidden" name="customer_id" value="<?=$customerId;?>" />
+	            	<?php foreach($outOfStockProductArray as $data) {  ?>
+		            	<div class="product-container">
+		            		<div class="image-container">
+		            			<img src="<?=$data['image'];?>" />
+		            		</div>
+		            		<div class="info-container">
+		            			<span><?=$data['product_name']?></span>
+		            			<span><?=$data['product_sku']?></span>
+		            			<span></span>
+		            		</div>
+		            	</div>
+						<input type="hidden" name="product[<?=$data['product_id'];?>][id]" value="<?=$data['product_id'];?>" />
+						<input type="hidden" name="product[<?=$data['product_id'];?>][sku]" value="<?=$data['product_sku'];?>" />
+						<input type="hidden" name="product[<?=$data['product_id'];?>][name]" value="<?=$data['product_name'];?>" />
+						<input type="hidden" name="product[<?=$data['product_id'];?>][quote_item_id]" value="<?=$data['quote_item_id'];?>" />
+	            	<?php } ?>
+	            </form>    
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/x-magento-init">
+{
+    "#stock-notification-popup": {
+        "Chandan_StockNotification/js/model/stock-notification-popup": {
+        	"totalProducts" : "<?=$count;?>"
+        }
+    }
+}
+</script>

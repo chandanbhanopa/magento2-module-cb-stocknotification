@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">stocknotification_listing.stock_notification_listing_data_source</item>
+            <item name="deps" xsi:type="string">stocknotification_listing.stock_notification_listing_data_source</item>
+        </item>
+        <item name="spinner" xsi:type="string">stocknotification_columns</item>
+    </argument>
+    <dataSource name="stock_notification_listing_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">\Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider</argument>
+            <argument name="name" xsi:type="string">stock_notification_listing_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">entity_id</argument>
+            <argument name="requestFieldName" xsi:type="string">entity_id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="indexField" xsi:type="string">id</item>
+                    </item>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+    <listingToolbar name="listing_top">
+         <settings>
+            <sticky>true</sticky>
+        </settings>
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls"/>
+        <exportButton name="export_button"/>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+    <columns name="stocknotification_columns">
+        <column name="entity_id">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">id</label>
+                <resizeDefaultWidth>25</resizeDefaultWidth>
+            </settings>
+        </column>
+        <column name="customer_id">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">Customer Id</label>
+                <resizeDefaultWidth>25</resizeDefaultWidth>
+            </settings>
+        </column>
+        <column name="product_id">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">Product Id</label>
+                <resizeDefaultWidth>25</resizeDefaultWidth>
+            </settings>
+        </column>
+        <column name="product_sku">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">Product Sku</label>
+                <resizeDefaultWidth>25</resizeDefaultWidth>
+            </settings>
+        </column>
+        <column name="product_name">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">Product Name</label>
+                <resizeDefaultWidth>25</resizeDefaultWidth>
+            </settings>
+        </column>
+        <column name="created_at">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">Created Date</label>
+                <resizeDefaultWidth>25</resizeDefaultWidth>
+            </settings>
+        </column>
+
+      
+    </columns>
+</listing>
